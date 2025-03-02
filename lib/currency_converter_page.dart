@@ -62,7 +62,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.black,
-        title: Text("Currency Converter"),
+        title: Text("Currency Converter"), //app title
         centerTitle: true,
       ),
 
