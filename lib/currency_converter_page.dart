@@ -156,8 +156,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                       ),
                     ),
 
-                  SizedBox(
-                    width: 100,
+                  Container(
+                    color: Colors.blue,
                   child: DropdownButton<String>(
                     value: toCurrency,
                     isExpanded: true,
