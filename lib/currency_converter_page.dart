@@ -13,6 +13,7 @@ class CurrencyConverterPage extends StatefulWidget {
 class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   String fromCurrency = "USD";
   String toCurrency = "EUR";
+  double amount = 0.0;
   double rate = 0.0;
   double total = 0.0;
   TextEditingController amountController = TextEditingController();
@@ -34,13 +35,13 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   }
 
   void _swapCurrencies() {
-    setState(() {
-      String temp = fromCurrency;
+          String temp = fromCurrency;
       fromCurrency = toCurrency;
       toCurrency = temp;
       _getRate();
-    });
-
+       setState(() {
+        total = amount * rate;
+       });
   }
 
 
@@ -113,7 +114,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 onChanged: (value) {
                   if (value !='') {
                     setState(() {
-                      double amount = double.parse(value);
+                      amount = double.parse(value);
                       total = amount * rate;
                     });
                   }
@@ -125,7 +126,9 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(width: 100,
+                  Container (
+                    width: 100,
+                    color: const Color(0xFF00394C),
                   child: DropdownButton<String>(
                     value: fromCurrency,
                     isExpanded: true,
@@ -157,8 +160,9 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                     ),
 
                   Container(
-                    color: Colors.blue,
-                  child: DropdownButton<String>(
+                    width:100,
+                    color: const Color(0xFF00394C),
+                    child: DropdownButton<String>(
                     value: toCurrency,
                     isExpanded: true,
                     dropdownColor: Color.fromARGB(255, 191, 208, 221),
