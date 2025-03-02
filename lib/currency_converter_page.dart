@@ -125,7 +125,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  DropdownButton<String>(
+                  SizedBox(width: 100,
+                  child: DropdownButton<String>(
                     value: fromCurrency,
                     isExpanded: true,
                     dropdownColor: Color.fromARGB(255, 191, 208, 221),
@@ -144,17 +145,20 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                     },
 
                     ),
+                  ),
                   
                   IconButton(
                       onPressed: _swapCurrencies,
                       icon: Icon(
                         Icons.swap_horiz,
-                        size: 40,
+                        size: 50,
                         color: const Color(0xFF00394C),
                       ),
                     ),
 
-                  DropdownButton<String>(
+                  SizedBox(
+                    width: 100,
+                  child: DropdownButton<String>(
                     value: toCurrency,
                     isExpanded: true,
                     dropdownColor: Color.fromARGB(255, 191, 208, 221),
@@ -173,6 +177,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                     },
 
                     ),
+                  ),
                     
                   ],                
                 ),
