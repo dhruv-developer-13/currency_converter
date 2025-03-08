@@ -11,7 +11,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Currency Converter",
+      theme: ThemeData(
+        primaryColor: const Color(0xFF00394C), // Deep Blue
+        scaffoldBackgroundColor: const Color(0xFFF4F7FA), // Light Grey
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFFF6500), // Orange Button
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      ),
+      title: "Currency Converter", // App title
       home: CurrencyConverterPage(),
     );
   }
