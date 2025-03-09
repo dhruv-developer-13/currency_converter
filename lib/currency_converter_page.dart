@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/dropdown.dart';
 import 'package:flutter_application_1/widgets/amount_input.dart';
 import 'package:flutter_application_1/widgets/total_box.dart';
@@ -15,7 +15,7 @@ class CurrencyConverterPage extends StatefulWidget {
  
 class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   String fromCurrency = "USD"; //default currency
-  String toCurrency = "EUR"; //default currency
+  String toCurrency = "USD"; //default currency
   double amount = 0.0; //amount entered by the user
   double rate = 0.0; //rate of the currency entered by the user
   double total = 0.0; //total amount of the currency entered by the user
@@ -23,11 +23,11 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   TextEditingController amountController = TextEditingController(text: "0"); 
   // amountController is an instance of class TextEditingController that is used to control and retrieve the input from a TextField
   // It takes input from user and saves it in amount but has 0 as its default value
-  List<String> currencies = [];
+  List<String> currencies = []; //stores the list of currencies fetched from the API
 
   @override
-  void initState() {
-    super.initState();
+  void initState() { //fetches the list of currencies from the API when the page is initialized
+    super.initState(); 
     _getCurrencies();
   }
 
@@ -36,7 +36,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
 
   var data = json.decode(response.body);
   setState(() {
-    rate = data['rates'][toCurrency];
+    rate = data['rates'][toCurrency]; //updates rate based on the toCurrency
   });
   }
 
@@ -46,28 +46,28 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       fromCurrency = toCurrency; //temp fromCurrency to store toCurrency string
       toCurrency = temp; //toCurrency string to store temp string
       _getRate(); //getRate function to get the rate of the current currency in fromCurrency  
-        total = amount * rate;
       });
   }
 
   Future<void> _getRate() async {
-  try {
-    final response = await http.get(
+  try { //handle errors if API request fails
+    final response = await http.get( //waits for API response before proceeding
       Uri.parse('https://api.exchangerate-api.com/v4/latest/$fromCurrency'),
     );
 
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
+    if (response.statusCode == 200) { // if API request is successful
+      var data = json.decode(response.body); //coverts JSON response to Dart Map
 
-      setState(() {
-        currencies = (data['rates'] as Map<String, dynamic>).keys.toList();
-        rate = data['rates'][toCurrency] ?? 0.0; // Default to 0 if null
+      setState(() { //updates the UI with the new data
+        currencies = (data['rates'] as Map<String, dynamic>).keys.toList(); //extraxts currency codes from the data
+        rate = data['rates'][toCurrency] ?? 0.0; //fetches rate of toCurrency and Default to 0 if null
+        total = amount * rate; //updates total amount based on the new rate
       });
     } else {
-      throw Exception('Failed to load exchange rates. Status Code: ${response.statusCode}');
+      throw Exception('Failed to load exchange rates. Status Code: ${response.statusCode}'); //if status code is not 200 it throws exception
     }
-  } catch (error) {
-    debugPrint('Error fetching exchange rate: $error');
+  } catch (error) { //catches error if API request fails
+    debugPrint('Error fetching exchange rate: $error'); //prints error message to the console
   }
 }
 
@@ -75,7 +75,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 191, 208, 221),
+      backgroundColor: const Color.fromARGB(255, 143, 190, 224),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 70, 157, 185), //appbar background color transparent 
         elevation: 0,
@@ -91,7 +91,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
             children: [
               Padding(padding: EdgeInsets.all(20),
               child: Image.asset(
-                'images/currency_converter2.png',
+                'images/currency_converter3.png',
                 width: 300,
                 height: 250,
               ),
@@ -111,7 +111,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 },
               ),
 
-              const SizedBox(height: 40), //adds vertical space between the textfield and the dropdowns
+              const SizedBox(height: 50), //adds vertical space between the textfield and the dropdowns
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +121,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                     currencies: currencies,
                     onChanged: (newValue) {
                       setState(() {
-                        fromCurrency = newValue ?? fromCurrency;
+                        fromCurrency = newValue ?? fromCurrency; //changes  newvalue to fromCurrency and gets the rate of the current currency in fromCurrency
                         _getRate();
                       });
                     }, 
@@ -140,7 +140,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                     currencies: currencies,
                     onChanged: (newValue) {
                       setState(() {
-                        fromCurrency = newValue !;
+                        toCurrency = newValue ?? toCurrency; //changes  newvalue to toCurrency and gets the rate of the current currency in toCurrency
                         _getRate();
                       });
                     },  
@@ -149,16 +149,17 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                   ], //childerns for currency dropdowns                
                 ),
                 
-                const SizedBox(height: 15), //adds vertical space between the dropdowns and the text
+                const SizedBox(height: 50), //adds vertical space between the dropdowns and the text
                 
                 Text( // Displaying the rate of the currency entered by the user.
-                  "Rate : $rate",
+                  "Current Rate : $rate",
                   style: TextStyle(
-                  fontSize: 20, color: Color(0xFF00394C),
+                  fontSize: 20, 
+                  color: Colors.black,
                 ),
                 ),
                 
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
 
                 TotalBox ( // Adding TotalBox widget to display the total amount of the currency entered by the user.)
                   total: total,

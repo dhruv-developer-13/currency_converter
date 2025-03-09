@@ -39,10 +39,18 @@ class _AmountState extends State<Amount> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 220, // Set width of the container
+      width: MediaQuery.of(context).size.width*0.95, // Set width of the container
+      height: 60, // Set height of the container
       padding: const EdgeInsets.symmetric(horizontal: 8), // Add padding to both sides of the container
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 40, 116, 141),
+        gradient: LinearGradient(
+          colors: [
+            const Color.fromARGB(255, 47, 94, 131),
+            const Color.fromARGB(255, 22, 103, 141)
+          ], // Gradient colors
+          begin: Alignment.topLeft, // Start from top left
+          end: Alignment.bottomRight, // End at bottom right
+        ),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(

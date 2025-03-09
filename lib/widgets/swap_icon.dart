@@ -33,7 +33,7 @@ class _SwapButtonState extends State<SwapButton> {
         height: 60,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: const Color(0xFFFF6500),
+          color:  const Color(0xFF469DB9),
           border: Border.all(
             color: const Color(0xFF00394C), 
             width: 2,

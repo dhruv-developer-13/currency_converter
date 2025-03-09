@@ -11,13 +11,13 @@ class TotalBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180,
-      height: 50,
+      width: MediaQuery.of(context).size.width*0.95, // Set width of the container fitting the screen width
+      height: 60,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color.fromARGB(255, 111, 156, 190),
-            const Color.fromARGB(255, 43, 120, 156)
+            const Color.fromARGB(255, 47, 94, 131),
+            const Color.fromARGB(255, 22, 103, 141)
           ], // Gradient colors
           begin: Alignment.topLeft, // Start from top left
           end: Alignment.bottomRight, // End at bottom right

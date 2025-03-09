@@ -16,14 +16,16 @@ class CurrencyDropdown extends StatelessWidget { //immutable widget
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5), //padding for the
+    child:Container(
       width: 100,
       decoration: BoxDecoration(
       color: const Color.fromARGB(255, 70, 157, 185),
       borderRadius: BorderRadius.circular(18),  
       ),
       child: DropdownButtonFormField<String>(
-        value: currencies.contains(value) ? value : null, // Checks and Set it as the selected value and if it is not in the list then Set value to null
+        value: value, // Checks and Set it as the selected value and if it is not in the list then Set value to null
         isExpanded: true, // Dropdown expands to fit the container
         dropdownColor:  const Color.fromARGB(255, 48, 147, 180), 
         decoration: InputDecoration(
@@ -51,6 +53,7 @@ class CurrencyDropdown extends StatelessWidget { //immutable widget
         }).toList(),
         onChanged: onChanged,
       ),
+    ),
     );
   }
 }
