@@ -59,13 +59,26 @@ class _AmountState extends State<Amount> {
       ),
       child: Row(
         children: [
+          Container( // Container for the button
+            width: 50,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:  const Color(0xFF469DB9),
+              border: Border.all(
+                color: const Color(0xFF00394C), 
+                width: 2,
+                ),
+              ),
+          
           // Decrement Button
-          IconButton(
+          child:IconButton( 
             icon: const Icon(
               Icons.remove, // Minus icon
               color:  Colors.black, // Black color for icon
               ),
             onPressed: _decrement,
+          ),
           ),
           // Amount TextField
           Expanded(
@@ -83,13 +96,26 @@ class _AmountState extends State<Amount> {
               onChanged: widget.onChanged,
             ),
           ),
+
           // Increment Button
-          IconButton(
-            icon: const Icon (
+          Container( // Container for the button
+            width: 50,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:  const Color(0xFF469DB9),
+              border: Border.all(
+                color: const Color(0xFF00394C), 
+                width: 2,
+                ),
+              ),
+            child:IconButton(
+              icon: const Icon (
               Icons.add, // Plus icon
               color:  Colors.black, // Black color for icon
               ),
             onPressed: _increment,
+            ),
           ),
         ],
       ),
