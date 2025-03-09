@@ -52,6 +52,10 @@ class _AmountState extends State<Amount> {
           end: Alignment.bottomRight, // End at bottom right
         ),
         borderRadius: BorderRadius.circular(12),
+        border: Border.all( // Add border to the container
+          color: Colors.black,
+          width: 2,
+          ),
       ),
       child: Row(
         children: [

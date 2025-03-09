@@ -31,11 +31,12 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     _getCurrencies();
   }
 
-  Future<void> _getCurrencies() async{
-  var response = await http.get(Uri.parse('https://api.exchangerate-api.com/v4/latest/USD'));
+  Future<void> _getCurrencies() async{ //asynchronously gets the list of currencies from the API when the page is initialized
+  var response = await http.get(Uri.parse('https://api.exchangerate-api.com/v4/latest/USD')); //sends HTTP GET request to the url and waits till the request is completed
 
-  var data = json.decode(response.body);
-  setState(() {
+  var data = json.decode(response.body); //converts JSON to a list of currencies like dictionary
+  setState(() { //triggers a rebuilt of widget as rate changes dynamically
+    currencies = (data['rates'] as Map<String, dynamic>).keys.toList(); //extraxts currency codes from the data
     rate = data['rates'][toCurrency]; //updates rate based on the toCurrency
   });
   }
@@ -50,7 +51,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   }
 
   Future<void> _getRate() async {
-  try { //handle errors if API request fails
+  try { //handle errors (netwrok issue or API error)
     final response = await http.get( //waits for API response before proceeding
       Uri.parse('https://api.exchangerate-api.com/v4/latest/$fromCurrency'),
     );
@@ -59,7 +60,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       var data = json.decode(response.body); //coverts JSON response to Dart Map
 
       setState(() { //updates the UI with the new data
-        currencies = (data['rates'] as Map<String, dynamic>).keys.toList(); //extraxts currency codes from the data
+        
         rate = data['rates'][toCurrency] ?? 0.0; //fetches rate of toCurrency and Default to 0 if null
         total = amount * rate; //updates total amount based on the new rate
       });
@@ -71,9 +72,9 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   }
 }
 
-
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 143, 190, 224),
       appBar: AppBar(
@@ -118,7 +119,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 children: [
                   CurrencyDropdown ( // Adding CurrencyDropdown widget to display the currency dropdowns.
                     value: fromCurrency,
-                    currencies: currencies,
+                    currencies: currencies,                   
                     onChanged: (newValue) {
                       setState(() {
                         fromCurrency = newValue ?? fromCurrency; //changes  newvalue to fromCurrency and gets the rate of the current currency in fromCurrency
@@ -126,6 +127,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                       });
                     }, 
                     labelText: "From",
+                    onTap: () {},
                   ),
                   
                   const SizedBox(width: 40), //adds horizontal space between the dropdowns
@@ -144,7 +146,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                         _getRate();
                       });
                     },  
-                    labelText: "To",         
+                    labelText: "To", 
+                    onTap: () {},         
                     ),
                   ], //childerns for currency dropdowns                
                 ),
@@ -164,7 +167,6 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 TotalBox ( // Adding TotalBox widget to display the total amount of the currency entered by the user.)
                   total: total,
                   ),
-
             ],),
           ),
         ),

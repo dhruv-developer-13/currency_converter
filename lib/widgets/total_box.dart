@@ -24,8 +24,8 @@ class TotalBox extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(12), // Rounded edges
         border: Border.all(
-          color: const Color(0xFF00394C),
-          width: 1,
+          color:  Colors.black,
+          width: 2,
         ),
         ),
 

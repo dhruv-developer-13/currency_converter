@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class CurrencyDropdown extends StatelessWidget { //immutable widget
   final String value; //currently selected currency
   final List<String> currencies; //list of currencies
-  final ValueChanged<String?> onChanged; //function to handle currency change
+  final ValueChanged<String?> onChanged; //function to handle currency selection
+  final VoidCallback onTap; //function to handle currency change
   final String labelText; //label text for the dropdown
 
   const CurrencyDropdown({
@@ -11,18 +12,23 @@ class CurrencyDropdown extends StatelessWidget { //immutable widget
     required this.value,
     required this.currencies,
     required this.onChanged,
+    required this.onTap,
     required this.labelText, 
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5), //padding for the
+    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5), //padding for the dropdown
+    child: GestureDetector(
+      onTap: onTap, //trigger onTap event
+    
     child:Container(
       width: 100,
       decoration: BoxDecoration(
       color: const Color.fromARGB(255, 70, 157, 185),
-      borderRadius: BorderRadius.circular(18),  
+      borderRadius: BorderRadius.circular(18), 
+       
       ),
       child: DropdownButtonFormField<String>(
         value: value, // Checks and Set it as the selected value and if it is not in the list then Set value to null
@@ -35,12 +41,18 @@ class CurrencyDropdown extends StatelessWidget { //immutable widget
 
           enabledBorder: OutlineInputBorder( // Border when not focused
             borderRadius: BorderRadius.circular(18), // Rounded edges 
-            borderSide: const BorderSide(color: Color(0xFF00394C)), // Dark blue color for border
+            borderSide: const BorderSide(
+              color: Color(0xFF00394C), // Dark blue color for border
+              width: 2,
+              ),
           ),
 
           focusedBorder: OutlineInputBorder( // Border when focused
             borderRadius: BorderRadius.circular(18), // Rounded edges 
-            borderSide: const BorderSide(color: Color.fromARGB(255, 3, 81, 107)), // Dark blue color for border
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 3, 81, 107), // Dark blue color for border
+              width: 2,
+              ), 
           ),
           ),
         
@@ -52,7 +64,9 @@ class CurrencyDropdown extends StatelessWidget { //immutable widget
           );
         }).toList(),
         onChanged: onChanged,
+        
       ),
+    ),
     ),
     );
   }
