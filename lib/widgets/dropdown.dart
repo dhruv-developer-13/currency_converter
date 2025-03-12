@@ -37,8 +37,8 @@ class CurrencyDropdown extends StatelessWidget { //immutable widget
         decoration: InputDecoration(
           labelText: labelText,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
-          labelStyle: const TextStyle(color: Colors.black),
-
+          labelStyle: const TextStyle(color: Color(0xFF333333)),
+          
           enabledBorder: OutlineInputBorder( // Border when not focused
             borderRadius: BorderRadius.circular(18), // Rounded edges 
             borderSide: const BorderSide(

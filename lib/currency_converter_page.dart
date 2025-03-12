@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_application_1/widgets/dropdown.dart';
-import 'package:flutter_application_1/widgets/amount_input.dart';
-import 'package:flutter_application_1/widgets/total_box.dart';
-import 'package:flutter_application_1/widgets/swap_icon.dart';
+import 'package:currency_converter/widgets/dropdown.dart';
+import 'package:currency_converter/widgets/amount_input.dart';
+import 'package:currency_converter/widgets/total_box.dart';
+import 'package:currency_converter/widgets/swap_icon.dart';
 
 class CurrencyConverterPage extends StatefulWidget {
   const CurrencyConverterPage({super.key}); 
@@ -76,11 +76,11 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 143, 190, 224),
+      backgroundColor: const Color.fromRGBO(143, 190, 224, 1),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 70, 157, 185), //appbar background color transparent 
         elevation: 0,
-        foregroundColor: Colors.black, 
+        foregroundColor:Color(0xFF333333), 
         title: const Text("Currency Converter"), //app title
         centerTitle: true, //centers the title  of the application
       ),
@@ -158,7 +158,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                   "Current Rate : $rate",
                   style: TextStyle(
                   fontSize: 20, 
-                  color: Colors.black,
+                  color: Color(0xFF333333),
                 ),
                 ),
                 

@@ -89,7 +89,10 @@ class _AmountState extends State<Amount> {
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: "Amount",
-                labelStyle: const TextStyle(color: Colors.black),
+                labelStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 22,
+                  ),
                 floatingLabelAlignment: FloatingLabelAlignment.center, // Align floating label to center
                 border: InputBorder.none, // Remove extra border inside Container
               ),
