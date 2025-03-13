@@ -66,11 +66,12 @@ flutter:
    -  images/currency_converter3.png
   #   - images/a_dot_ham.jpeg
 
-flutter_icons:
-    android: true
+flutter_launcher_icons:
+    android: "launcher_icon"
     ios: true
     image_path: "images/currency_converter3.png"
-
+    adaptive_icon_foreground: "images/currency_converter3.png"
+    adaptive_icon_background: "images/currency_converter4.png"
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

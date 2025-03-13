@@ -17,7 +17,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   String fromCurrency = "USD"; //default currency
   String toCurrency = "USD"; //default currency
   double amount = 0.0; //amount entered by the user
-  double rate = 0.0; //rate of the currency entered by the user
+  double rate = 1.0; //rate of the currency entered by the user
   double total = 0.0; //total amount of the currency entered by the user
   
   TextEditingController amountController = TextEditingController(text: "0"); 

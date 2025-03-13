@@ -5,7 +5,8 @@ class Amount extends StatefulWidget { //stateful widget class because its state 
   final ValueChanged<String> onChanged; 
 
   const Amount({
-    super.key, required this.controller, 
+    super.key, 
+    required this.controller, 
     required this.onChanged //function to handle the change in the amount
     });
 
